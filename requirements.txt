@@ -4,4 +4,4 @@ scikit-learn
 streamlit-aggrid
 hydralit_components
 networkx 
-PIL 
+Pillow
