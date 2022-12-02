@@ -77,8 +77,7 @@ if uploaded_file is not None:
     #Add positions of nodes to the graph
     for n, p in pos.items():
         G.node[n]['pos'] = p
- #Use plotly to visualize the network graph created using NetworkX
-    #Adding edges to plotly scatter plot and specify mode='lines'
+
     edge_trace = go.Scatter(
         x=[],
         y=[],
