@@ -77,3 +77,61 @@ if uploaded_file is not None:
     #Add positions of nodes to the graph
     for n, p in pos.items():
         G.node[n]['pos'] = p
+ #Use plotly to visualize the network graph created using NetworkX
+    #Adding edges to plotly scatter plot and specify mode='lines'
+    edge_trace = go.Scatter(
+        x=[],
+        y=[],
+        line=dict(width=1,color='#888'),
+        hoverinfo='none',
+        mode='lines')
+
+    for edge in G.edges():
+        x0, y0 = G.node[edge[0]]['pos']
+        x1, y1 = G.node[edge[1]]['pos']
+        edge_trace['x'] += tuple([x0, x1, None])
+        edge_trace['y'] += tuple([y0, y1, None])
+    
+    #Adding nodes to plotly scatter plot
+    node_trace = go.Scatter(
+        x=[],
+        y=[],
+        text=[],
+        mode='markers',
+        hoverinfo='text',
+        marker=dict(
+            showscale=True,
+            colorscale=colorscale, #The color scheme of the nodes will be dependent on the user's input
+            color=[],
+            size=20,
+            colorbar=dict(
+                thickness=10,
+                title='# Connections',
+                xanchor='left',
+                titleside='right'
+            ),
+            line=dict(width=0)))
+
+    for node in G.nodes():
+        x, y = G.node[node]['pos']
+        node_trace['x'] += tuple([x])
+        node_trace['y'] += tuple([y])
+
+    for node, adjacencies in enumerate(G.adjacency()):
+        node_trace['marker']['color']+=tuple([len(adjacencies[1])]) #Coloring each node based on the number of connections 
+        node_info = adjacencies[0] +' # of connections: '+str(len(adjacencies[1]))
+        node_trace['text']+=tuple([node_info])
+    
+    #Plot the final figure
+    fig = go.Figure(data=[edge_trace, node_trace],
+                layout=go.Layout(
+                    title=title, #title takes input from the user
+                    title_x=0.45,
+                    titlefont=dict(size=25),
+                    showlegend=False,
+                    hovermode='closest',
+                    margin=dict(b=20,l=5,r=5,t=40),
+                    xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                    yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)))
+
+    st.plotly_chart(fig, use_container_width=True) #Show the graph in streamlit
