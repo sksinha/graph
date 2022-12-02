@@ -3,3 +3,6 @@ cufflinks
 scikit-learn
 streamlit-aggrid
 hydralit_components
+networkx 
+plotly.graph_objs 
+PIL 
