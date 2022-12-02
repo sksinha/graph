@@ -7,9 +7,9 @@ from  PIL import Image
 
 #Add a logo (optional) in the sidebar
 #logo = Image.open(r'C:\Users\13525\Desktop\Insights_Bees_logo.png')
-logo = Image.open(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1zQyqOwMHGHnk708NVPhoMIKO3rtX3bd74vVVU4rIiQ&s')
+#logo = Image.open(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1zQyqOwMHGHnk708NVPhoMIKO3rtX3bd74vVVU4rIiQ&s')
 
-st.sidebar.image(logo,  width=120)
+#st.sidebar.image(logo,  width=120)
 
 #Add the expander to provide some information about the app
 with st.sidebar.expander("About the App"):
